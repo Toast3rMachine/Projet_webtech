@@ -1,5 +1,5 @@
 """
-URL configuration for Projet project.
+URL configuration for webtech_projet project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -14,12 +14,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# projet/urls.py
-from django.contrib import admin
-from django.urls import path, include
+# comment/urls.py
+from django.urls import path
+from .views import CommentListView, CommentDetailView, clear_comments
+
+app_name = 'comment'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('polar_bear/', include('polar_bear.urls')),  # URLs de polar_bear
-    path('comment/', include('comment.urls')),  # Ajoutez cette ligne pour inclure les URLs de l'application "comment"
+    path('list/', CommentListView.as_view(), name='comment_list'),
+    path('<int:pk>/', CommentDetailView.as_view(), name='comment_detail'),
+    path('clear-comments/', clear_comments, name='clear_comments'),
+    # Ajoutez d'autres URL patterns au besoin
 ]
+

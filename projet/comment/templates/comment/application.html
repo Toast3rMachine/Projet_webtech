@@ -1,0 +1,28 @@
+<!-- blog/templates/blog/comment-form.html -->
+
+{% extends "home.html" %}
+
+{% block content %}
+  <h2>Formulaire de commentaire</h2>
+  
+  <form method="post" action="{% url 'application' %}">
+    {% csrf_token %}
+    
+    <label for="Title">Titre :</label>
+    <input type="text" id="Title" name="Title" required>
+    
+    <label for="author">Auteur :</label>
+    <input type="text" id="author" name="author" required>
+    <!-- Champ caché pour l'ID de l'article -->
+    <input type="hidden" name="article_id" value="{{ article.id }}">
+    
+    <button type="submit">Soumettre</button>
+  </form>
+
+  <form method="post" action="{% url 'clear_comments' %}"onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer tous les commentaires ?');">
+    {% csrf_token %}
+    <button type="submit">Supprimer tous les commentaires</button>
+  </form>
+
+  <p>{{ message }}</p>
+{% endblock %}
