@@ -1,1 +1,5 @@
 env
+Projet/db.sqlite3
+Projet/polar_bear/__pycache__
+Projet/polar_bear/migrations
+Projet/Projet/__pycache__

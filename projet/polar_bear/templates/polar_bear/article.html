@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    {% if article %}
+        <h1>{{ article.title|capfirst }}</h1>
+        <p>Image : <img src="{{ article.image }}"></p>
+        <p>Contenu : {{ article.content|striptags }}</p>
+        <p>Auteur : {{ article.author|capfirst }}</p>
+        <p>Date de création : {{ article.date }}</p>
+    {% else %}
+        <p>Pas d'article avec l'id</p>
+    {% endif %}
+
+    
+{% endblock %}
