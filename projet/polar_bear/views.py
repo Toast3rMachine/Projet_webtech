@@ -30,4 +30,3 @@ def article(request, id):
     print(article.title)
     print(article.image)
     return render(request, 'polar_bear/article.html', {'article': article})
-
