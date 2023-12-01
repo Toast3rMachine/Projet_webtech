@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.forms import Form, CharField
 
 from .models import Article
+from comment.models import Comment
 
 class search_article(Form):
     search = CharField(max_length=100, required=False)
@@ -22,11 +23,10 @@ def list_article(request):
             articles = Article.objects.filter(title__contains=tile_form)
             form.fields['title'].initial = tile_form
 
-    return render(request, 'polar_bear/list_articles.html', {'search_form': form,'articles': articles, 'title': 'Liste des articles'})
+    return render(request, 'polar_bear/list_articles.html', {'search_form': form, 'articles': articles, 'title': 'Liste des articles'})
 
 
 def article(request, id):
     article = get_object_or_404(Article, id=id)
-    print(article.title)
-    print(article.image)
-    return render(request, 'polar_bear/article.html', {'article': article})
+    comment = Comment.objects.filter(article=article)
+    return render(request, 'polar_bear/article.html', {'article': article, 'comment': comment})

@@ -4,13 +4,25 @@
 {% block content %}
     {% if article %}
         <h1>{{ article.title|capfirst }}</h1>
-        <p>Image : <img src="{{ article.image }}"></p>
         <p>Contenu : {{ article.content|striptags }}</p>
         <p>Auteur : {{ article.author|capfirst }}</p>
         <p>Date de création : {{ article.date }}</p>
+        <p>Commentaire :</p>
+        {% for comment in article.comment_set.all %}
+            <p>---------------</p>
+            <p>{{ comment.author }} | {{ comment.date }}</p>
+            <p>{{ comment.content }}</p>
+        {% endfor %}
     {% else %}
         <p>Pas d'article avec l'id</p>
     {% endif %}
+    <a href="{% url 'list_article' %}">Retour à la liste des articles</a></br>
+    <a href="{% url 'comment' %}">Faire un commentaire</a>
+
+    <form method="post" action="{% url 'clear_comments' %}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer tous les commentaires ?');">
+        {% csrf_token %}
+        <button type="submit">Supprimer tous les commentaires</button>
+    </form>
 
     
-{% endblock %}
+{% endblock %} 

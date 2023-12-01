@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block header %}
-    <h1>{{ title }}</h1>
-{% endblock %}
+{% load static %}
 
 {% block content %}
+    <h1>{{ title }}</h1>    
+    <img src="{% static 'polar_bear/img/Ours.jpg' %}" alt="Ours polaire" width="20%" height="20%"/>
     <form action="{% url 'list_article' %}" method="post">
         {% csrf_token %}
         {{ search_form.as_p }}
@@ -16,5 +16,4 @@
         {% endfor %}
     </ul>
 
-    
 {% endblock %}

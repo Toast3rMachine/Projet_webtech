@@ -1,12 +1,13 @@
 {% block content %}
   <h2>Formulaire de commentaire</h2>
   
-  <form method="post" action="{% url 'application' %}">
+  <form method="post" action="{% url 'comment' %}">
     {% csrf_token %}
     {{ form.as_p }}
     
     <button type="submit">Soumettre</button>
   </form>
+  <a href="{% url 'list_article' %}">Retour à la liste des articles</a>
 
   <p>{{ message }}</p>
 {% endblock %}
