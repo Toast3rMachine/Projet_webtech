@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'comment',
-    'polar_bear'
+    'polar_bear',
 ]
 
 MIDDLEWARE = [
