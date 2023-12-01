@@ -2,18 +2,17 @@
 {% load static %}
 
 {% block content %}
-    <h1>{{ title }}</h1>    
-    <img src="{% static 'polar_bear/img/Ours.jpg' %}" alt="Ours polaire" width="20%" height="20%"/>
-    <form action="{% url 'list_article' %}" method="post">
+    <h1 class="text-3xl font-bold mb-4">{{ title }}</h1>    
+    <img src="{% static 'polar_bear/img/Ours.jpg' %}" alt="Ours polaire" class="w-20 h-20 mb-4"/>
+    <form action="{% url 'list_article' %}" method="post" class="mb-4">
         {% csrf_token %}
         {{ search_form.as_p }}
-        <button type="submit">Rechercher</button>
+        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md">Rechercher</button>
     </form>
-    <p>Voici la liste des articles</p>
-    <ul>
+    <p class="mb-2">Voici la liste des articles</p>
+    <ul class="list-disc pl-4">
         {% for article in articles %}
-            <li><a href="{% url 'article' article.id %}">{{ article.title }}</a></li>
+            <li><a href="{% url 'article' article.id %}" class="text-blue-500">{{ article.title }}</a></li>
         {% endfor %}
     </ul>
-
 {% endblock %}
