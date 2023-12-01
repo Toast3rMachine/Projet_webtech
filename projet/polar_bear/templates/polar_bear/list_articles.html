@@ -4,6 +4,12 @@
 {% endblock %}
 
 {% block content %}
+    <form action="{% url 'list_article' %}" method="post">
+        {% csrf_token %}
+        {{ search_form.as_p }}
+        <button type="submit">Rechercher</button>
+    </form>
+    <p>Voici la liste des articles</p>
     <ul>
         {% for article in articles %}
             <li><a href="{% url 'article' article.id %}">{{ article.title }}</a></li>
