@@ -20,6 +20,4 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('polar_bear/', include('polar_bear.urls')),  # URLs de polar_bear
-    path('comment/', include('comment.urls')),  # Ajoutez cette ligne pour inclure les URLs de l'application "comment"
 ]

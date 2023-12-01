@@ -1,0 +1,3 @@
+[MASTER]
+init-hook='import sys, os; sys.path.append(os.path.abspath("C:/Users/adam/Documents/GitHub/Projet_webtech/Projet"))'
+django-settings-module=Projet.settings

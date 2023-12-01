@@ -1,8 +1,10 @@
-# forms.py de comment
-from django import forms
-from .models import Post, Article, Comment
+"""Forms for the comment app."""
 
-class MyCommentForm(forms.ModelForm):
+from django import forms
+from .models import Article, Comment
+
+class CommentForm(forms.ModelForm):
+    """Form for user comments."""
     class Meta:
         model = Comment
         fields = ['content']
@@ -11,6 +13,7 @@ class MyCommentForm(forms.ModelForm):
         }
 
 class ArticleForm(forms.ModelForm):
+    """Form for articles."""
     class Meta:
         model = Article
         fields = ['title', 'content']

@@ -1,42 +1,54 @@
-# views.py
+# comment/views.py
 from django.http import HttpResponse
-from django.views import View
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.views import View
 from .models import Comment
-from .forms import ArticleForm, MyCommentForm 
+from .forms import ArticleForm, CommentForm
 
-class CommentForm(MyCommentForm):
+class CommentForm(CommentForm):
+    """
+    Formulaire pour les commentaires.
+    """
     class Meta:
         model = Comment
         fields = ['content']
 
+class CommentView(View):
+    """
+    Vue pour gérer les commentaires.
+    """
+
+    def get(self, request):
+        """
+        Gère la requête GET.
+        """
+        return HttpResponse("Hello, this is a GET request.")
+
+    def post(self, request):
+        """
+        Gère la requête POST.
+        """
+        return HttpResponse("Hello, this is a POST request.")
+
 def application(request):
+    """
+    Vue pour gérer l'application.
+    """
     if request.method == 'POST':
         form = ArticleForm(request.POST)
         if form.is_valid():
-            article = form.save()
+            form.save()
             return redirect('comment_list')
     else:
         form = ArticleForm()
 
     return render(request, 'comment/application.html', {'form': form})
 
-class CommentListView(View):
-    template_name = 'comment/comment_list.html'
-
-    def get(self, request):
-        comments = Comment.objects.all()
-        return render(request, self.template_name, {'comments': comments})
-
-class CommentDetailView(View):
-    template_name = 'comment/comment_detail.html'
-
-    def get(self, request, pk):
-        comment = get_object_or_404(Comment, pk=pk)
-        return render(request, self.template_name, {'comment': comment})
-
 def clear_comments(request):
+    """
+    Vue pour supprimer tous les commentaires.
+    """
     try:
         deleted_count, _ = Comment.objects.all().delete()
         print("Deleted count:", deleted_count)
@@ -44,4 +56,17 @@ def clear_comments(request):
         messages.success(request, f'Tous les commentaires ont été supprimés avec succès. Nombre de commentaires supprimés : {deleted_count}')
     except Exception as e:
         print(f"Error: {str(e)}")
-        messages.error(request, f'Une erreur s\'est produite lors de la suppression des commentaires : {str(e)}')
+        messages.error(request, 'Une erreur s\'est produite lors de la suppression des commentaires.')
+
+def your_view(request):
+    """
+    Votre vue personnalisée.
+    """
+    try:
+        # Ajoutez votre logique de vue ici
+        pass
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        messages.error(request, 'Une erreur s\'est produite.')
+
+# Ajoutez d'autres vues au besoin

@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+admin.site.register(Comment)
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('content', 'date', 'user')
+    list_filter = ('user', 'date')
+    search_fields = ['user']
